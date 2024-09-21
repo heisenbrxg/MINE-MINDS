@@ -15,6 +15,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.tl.mineminds.ui.screen.LoginScreen
+import com.tl.mineminds.ui.screen.MainScreen
 import com.tl.mineminds.ui.screen.ScreenNames
 import com.tl.mineminds.ui.theme.MineMindsTheme
 
@@ -41,7 +42,7 @@ class MainActivity : ComponentActivity() {
                         composable(ScreenNames.MAIN.routeName,
                             enterTransition = { slideInHorizontally(initialOffsetX = {it}) })
                         {
-
+                            MainScreen(viewModel)
                         }
                     }
                     viewModel.currentRoute.observeForever {
