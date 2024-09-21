@@ -77,9 +77,9 @@ fun LearningMaterialPager(learningMaterials: List<LearningMaterial>) {
                         }
                     }
                 },
-                enabled = pagerState.currentPage < learningMaterials.size - 1
+                enabled = true
             ) {
-                Text(text = "Next")
+                Text(text = if(pagerState.currentPage < learningMaterials.size - 1) "Next" else "Take Quiz")
             }
         }
     }
