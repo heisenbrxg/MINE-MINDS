@@ -53,8 +53,7 @@ class MainViewModel:ViewModel(), SubjectItemInteraction {
     }
 
     override fun onSubjectItemSelected(subject: Subject) {
-        //mainScreenRoute.postValue(ScreenNames.LESSONS.routeName)
-        //todo set subject name
-        mainScreenRoute.postValue(ScreenNames.LEARNING_MATERIAL.routeName)
+        selectedLessonId.postValue(subject.id)
+        mainScreenRoute.postValue(ScreenNames.LESSONS.routeName)
     }
 }

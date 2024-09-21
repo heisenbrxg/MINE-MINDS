@@ -20,7 +20,7 @@ fun MainScreen(viewModel: MainViewModel) {
                 SubjectScreen(subjects!!, viewModel)
             }
             ScreenNames.LESSONS.routeName -> {
-
+                LessonScreen(lessonIem = emptyList())
             }
             ScreenNames.LEARNING_MATERIAL.routeName -> {
                 LearningMaterialScreen(viewModel)

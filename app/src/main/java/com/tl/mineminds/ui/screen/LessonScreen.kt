@@ -1,4 +1,4 @@
-
+package com.tl.mineminds.ui.screen
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -21,10 +21,14 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.app.mineminds.data.model.LessonItem
+import com.tl.mineminds.entity.LessonItem
+
+interface LessonScreenInteraction {
+    fun onLessonSelected(lessonIem: LessonItem)
+}
 
 @Composable
-fun LessonScreen(lessonIem: List<LessonItem>) {
+fun LessonScreen(lessonItems: List<LessonItem>, interaction: LessonScreenInteraction) {
     val list = listOf(
         LessonItem(1, "Addition", 1),
         LessonItem(2, "Subtraction", 1),
@@ -39,7 +43,7 @@ fun LessonScreen(lessonIem: List<LessonItem>) {
         LazyColumn() {
             items(list.size) { index ->
                 LessonItemCard(list[index].id, list[index].lessonName, itemClicked = {
-                    //Todo item click action
+                    interaction.onLessonSelected(list[index]) //todo replace with actual item
                 })
             }
         }
