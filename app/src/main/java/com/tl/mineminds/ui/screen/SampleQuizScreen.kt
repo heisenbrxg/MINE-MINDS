@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -25,12 +26,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import coil.compose.rememberAsyncImagePainter
-import coil.request.ImageRequest
-import coil.size.Size
-import com.app.mineminds.R
+import coil.compose.rememberImagePainter
+import com.tl.mineminds.R
+import com.tl.mineminds.entity.OptionData
+import com.tl.mineminds.entity.QuizData
 
 interface QuizScreenInteraction {
 
@@ -59,7 +59,7 @@ fun SampleQuizScreen() {
                     optionName = "11"
                 ),
                 OptionData(
-                    optionId = 13,
+                    optionId = 14,
                     optionName = "-11"
                 )
             ),
@@ -67,6 +67,7 @@ fun SampleQuizScreen() {
 
     Box(
         modifier = Modifier
+            .padding(16.dp)
             .fillMaxWidth()
             .fillMaxHeight()
     ) {
@@ -83,7 +84,6 @@ fun QuizDataCard(quizData: QuizData, itemClicked: () -> Unit) {
     val state = rememberScrollState()
     Column(
         modifier = Modifier
-            .background(Color.LightGray)
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
     ) {
@@ -103,21 +103,7 @@ fun QuizDataCard(quizData: QuizData, itemClicked: () -> Unit) {
                     .fillMaxWidth())
         }
 
-        val painter = rememberAsyncImagePainter(
-            model = ImageRequest.Builder(LocalContext.current)
-                .data(quizData.qImageUrl)
-                .error(R.drawable.algebra)
-                .size(Size.ORIGINAL) // Set the target size to load the image at.
-                .build()
-        )
-
-        Image(
-            painter = painter,
-            contentDescription = "qImage",
-            contentScale = ContentScale.Crop,
-            modifier = Modifier.fillMaxWidth()
-        )
-
+        Image(painter = rememberImagePainter(R.drawable.algebra), contentDescription = "", contentScale = ContentScale.Crop, modifier = Modifier.fillMaxSize().height(180.dp))
 
         Text(
             text = quizData.qDescription,

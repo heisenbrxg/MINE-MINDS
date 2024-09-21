@@ -47,7 +47,7 @@ fun MainScreen(viewModel: MainViewModel) {
                 )
             }
             ScreenNames.QUIZ.routeName -> {
-
+                SampleQuizScreen()
             }
         }
     }
