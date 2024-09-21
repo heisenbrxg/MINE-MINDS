@@ -46,6 +46,9 @@ fun MainScreen(viewModel: MainViewModel) {
                     viewModel
                 )
             }
+            ScreenNames.QUIZ.routeName -> {
+
+            }
         }
     }
 

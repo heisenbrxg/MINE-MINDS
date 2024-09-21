@@ -21,8 +21,12 @@ import androidx.compose.ui.unit.dp
 import com.tl.mineminds.entity.LearningMaterial
 import kotlinx.coroutines.launch
 
+interface LearningMaterialInteraction {
+    fun onTakeQuiz() //todo could be better.
+}
+
 @Composable
-fun LearningMaterialPager(learningMaterials: List<LearningMaterial>) {
+fun LearningMaterialPager(learningMaterials: List<LearningMaterial>, interaction: LearningMaterialInteraction) {
     val pagerState = rememberPagerState(pageCount = {learningMaterials.size})
     val coroutineScope = rememberCoroutineScope()
     Column(
@@ -74,6 +78,8 @@ fun LearningMaterialPager(learningMaterials: List<LearningMaterial>) {
                     coroutineScope.launch {
                         if (pagerState.currentPage < learningMaterials.size - 1) {
                             pagerState.animateScrollToPage(pagerState.currentPage + 1)
+                        } else {
+                            interaction.onTakeQuiz()
                         }
                     }
                 },

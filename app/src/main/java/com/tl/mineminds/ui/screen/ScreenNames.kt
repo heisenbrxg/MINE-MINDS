@@ -5,5 +5,6 @@ enum class ScreenNames(val routeName: String) {
     MAIN("mainscreen"),
     SUBJECTS("subjectsscreen"),
     LESSONS("lessonsscreen"),
-    LEARNING_MATERIAL("learningmaterial")
+    LEARNING_MATERIAL("learningmaterialscreen"),
+    QUIZ("quizscreen"),
 }

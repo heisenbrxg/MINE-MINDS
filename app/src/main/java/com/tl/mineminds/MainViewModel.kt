@@ -8,12 +8,13 @@ import com.tl.mineminds.entity.LearningMaterial
 import com.tl.mineminds.entity.LessonItem
 import com.tl.mineminds.entity.Subject
 import com.tl.mineminds.service.api.Api
+import com.tl.mineminds.ui.component.LearningMaterialInteraction
 import com.tl.mineminds.ui.component.SubjectItemInteraction
 import com.tl.mineminds.ui.screen.LessonScreenInteraction
 import com.tl.mineminds.ui.screen.ScreenNames
 import kotlinx.coroutines.launch
 
-class MainViewModel:ViewModel(), SubjectItemInteraction, LessonScreenInteraction {
+class MainViewModel:ViewModel(), SubjectItemInteraction, LessonScreenInteraction, LearningMaterialInteraction  {
 
     private var sharedPreferences: SharedPreferences? = null
 
@@ -67,6 +68,10 @@ class MainViewModel:ViewModel(), SubjectItemInteraction, LessonScreenInteraction
     override fun onSubjectItemSelected(subject: Subject) {
         selectedSubjectId.postValue(subject.id)
         mainScreenRoute.postValue(ScreenNames.LESSONS.routeName)
+    }
+
+    override fun onTakeQuiz() {
+        mainScreenRoute.postValue(ScreenNames.QUIZ.routeName)
     }
 
     override fun onLessonSelected(lessonItem: LessonItem) {

@@ -10,7 +10,7 @@ import com.tl.mineminds.ui.component.LearningMaterialPager
 @Composable
 fun LearningMaterialScreen(subjectId: Int, lessonId: Int, viewModel: MainViewModel) {
     val learningMaterials by viewModel.learningMaterials.observeAsState()
-    LearningMaterialPager(learningMaterials!!)
+    LearningMaterialPager(learningMaterials!!, viewModel)
     LaunchedEffect(Unit) {
         viewModel.loadLearningMaterials(subjectId, lessonId)
     }
