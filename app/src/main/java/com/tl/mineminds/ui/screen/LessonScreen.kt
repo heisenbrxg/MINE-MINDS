@@ -2,15 +2,21 @@ package com.tl.mineminds.ui.screen
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.KeyboardArrowRight
 import androidx.compose.material3.Card
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -28,7 +34,7 @@ interface LessonScreenInteraction {
 }
 
 @Composable
-fun LessonScreen(lessonItems: List<LessonItem>, interaction: LessonScreenInteraction) {
+fun LessonScreen(lessonIem: List<LessonItem>, interaction: LessonScreenInteraction) {
     val list = listOf(
         LessonItem(1, "Addition", 1),
         LessonItem(2, "Subtraction", 1),
@@ -39,11 +45,14 @@ fun LessonScreen(lessonItems: List<LessonItem>, interaction: LessonScreenInterac
         LessonItem(7, "Algebra", 1),
     )
 
-    Box(modifier = Modifier.fillMaxWidth()) {
+    Box(modifier = Modifier
+        .fillMaxWidth()
+        .fillMaxHeight()
+        .fillMaxSize()) {
         LazyColumn() {
             items(list.size) { index ->
                 LessonItemCard(list[index].id, list[index].lessonName, itemClicked = {
-                    interaction.onLessonSelected(list[index]) //todo replace with actual item
+                   // interaction.onLessonSelected(list[index]) //todo replace with actual item
                 })
             }
         }
@@ -67,8 +76,9 @@ fun LessonItemCard(num: Int, lessonName: String, itemClicked: () -> Unit) {
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.Center,
             modifier = Modifier
-                .padding(10.dp)
+                .padding(horizontal = 16.dp).padding(10.dp)
         ) {
             Text(
                 text = num.toString(),
@@ -83,12 +93,18 @@ fun LessonItemCard(num: Int, lessonName: String, itemClicked: () -> Unit) {
 
             Text(
                 text = lessonName,
+                modifier = Modifier.weight(1f).fillMaxWidth(),
                 style = TextStyle(
                     fontSize = 12.sp,
                     fontStyle = FontStyle.Normal,
                     fontFamily = FontFamily.SansSerif,
                     color = Color.Black
                 ),
+            )
+
+            Icon(
+                imageVector = Icons.Default.KeyboardArrowRight,
+                contentDescription = "Next",
             )
         }
     }
