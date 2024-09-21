@@ -10,7 +10,8 @@ class MainViewModel:ViewModel() {
     private var sharedPreferences: SharedPreferences? = null
 
 
-    private var currentRoute: MutableLiveData<String> = MutableLiveData(ScreenNames.LOGIN.routeName)
+    var currentRoute: MutableLiveData<String> = MutableLiveData(ScreenNames.LOGIN.routeName)
+        private set
     var username: MutableLiveData<String> = MutableLiveData("")
         private set
     var userToken: MutableLiveData<String> = MutableLiveData("")
@@ -21,7 +22,8 @@ class MainViewModel:ViewModel() {
     }
 
     fun onUsernameEntered(username: String) {
-
+        this.username.postValue(username)
+        currentRoute.postValue(ScreenNames.MAIN.routeName)
     }
 
 }

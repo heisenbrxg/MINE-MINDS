@@ -31,13 +31,13 @@ fun LoginScreen(onUsernameEntered:(String) -> Unit) {
     Box {
         Image(painter = rememberImagePainter(R.drawable.login_illustration), contentDescription = "", contentScale = ContentScale.Crop, modifier = Modifier.fillMaxSize())
         Box(modifier = Modifier
-            .safeContentPadding()
             .fillMaxSize(), contentAlignment = Alignment.BottomCenter) {
-            Column {
+            Column(modifier = Modifier.safeContentPadding()) {
                 TextField(modifier = Modifier.fillMaxWidth(), value = userName, onValueChange = {userName = it}, label = {Text("Enter username")} )
                 Spacer(modifier = Modifier.height(16.dp))
                 Button(modifier = Modifier.fillMaxWidth(), onClick = {
                     //do validations here
+                    onUsernameEntered(userName)
                 }) {
                     Text(text = "Login")
                 }

@@ -38,10 +38,15 @@ class MainActivity : ComponentActivity() {
                         ) {
                             LoginScreen(viewModel::onUsernameEntered)
                         }
-                        composable("main",
+                        composable(ScreenNames.MAIN.routeName,
                             enterTransition = { slideInHorizontally(initialOffsetX = {it}) })
                         {
 
+                        }
+                    }
+                    viewModel.currentRoute.observeForever {
+                        navController.navigate(it) {
+                            popUpTo(ScreenNames.LOGIN.routeName) {inclusive = true}
                         }
                     }
                 }
