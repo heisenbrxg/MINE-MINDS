@@ -15,6 +15,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.tl.mineminds.ui.screen.LoginScreen
+import com.tl.mineminds.ui.screen.ScreenNames
 import com.tl.mineminds.ui.theme.MineMindsTheme
 
 
@@ -31,13 +32,13 @@ class MainActivity : ComponentActivity() {
                 Surface() {
 
                     val navController = rememberNavController()
-                    NavHost(navController = navController, startDestination = "loginscreen") {
-                        composable("loginscreen",
+                    NavHost(navController = navController, startDestination = ScreenNames.LOGIN.routeName) {
+                        composable(ScreenNames.LOGIN.routeName,
                             exitTransition = { slideOutHorizontally(targetOffsetX = {-it}) }
                         ) {
                             LoginScreen(viewModel::onUsernameEntered)
                         }
-                        composable("playlistsscreen",
+                        composable("main",
                             enterTransition = { slideInHorizontally(initialOffsetX = {it}) })
                         {
 

@@ -10,7 +10,7 @@ class MainViewModel:ViewModel() {
     private var sharedPreferences: SharedPreferences? = null
 
 
-    private var currentRoute: MutableLiveData<String> = MutableLiveData(ScreenNames.LOGIN.name)
+    private var currentRoute: MutableLiveData<String> = MutableLiveData(ScreenNames.LOGIN.routeName)
     var username: MutableLiveData<String> = MutableLiveData("")
         private set
     var userToken: MutableLiveData<String> = MutableLiveData("")
