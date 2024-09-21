@@ -4,14 +4,16 @@ import android.content.SharedPreferences
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.tl.mineminds.entity.LearningMaterial
+import com.tl.mineminds.entity.LessonItem
 import com.tl.mineminds.entity.Subject
 import com.tl.mineminds.service.api.Api
 import com.tl.mineminds.ui.component.SubjectItemInteraction
+import com.tl.mineminds.ui.screen.LessonScreenInteraction
 import com.tl.mineminds.ui.screen.ScreenNames
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
-class MainViewModel:ViewModel(), SubjectItemInteraction {
+class MainViewModel:ViewModel(), SubjectItemInteraction, LessonScreenInteraction {
 
     private var sharedPreferences: SharedPreferences? = null
 
@@ -24,6 +26,9 @@ class MainViewModel:ViewModel(), SubjectItemInteraction {
         private set
 
     var subjects: MutableLiveData<List<Subject>> = MutableLiveData(emptyList())
+        private set
+
+    var learningMaterials: MutableLiveData<List<LearningMaterial>> = MutableLiveData(emptyList())
         private set
 
     var mainScreenRoute: MutableLiveData<String> = MutableLiveData(ScreenNames.LOGIN.routeName)
@@ -52,8 +57,20 @@ class MainViewModel:ViewModel(), SubjectItemInteraction {
         }
     }
 
+    fun loadLearningMaterials(subjectId: Int, lessonId: Int) {
+        viewModelScope.launch {
+            val newLearningMaterial = Api.fetchLearningMaterial(userToken.value!!)
+            learningMaterials.postValue(newLearningMaterial)
+        }
+    }
+
     override fun onSubjectItemSelected(subject: Subject) {
-        selectedLessonId.postValue(subject.id)
+        selectedSubjectId.postValue(subject.id)
         mainScreenRoute.postValue(ScreenNames.LESSONS.routeName)
+    }
+
+    override fun onLessonSelected(lessonItem: LessonItem) {
+        selectedLessonId.postValue(lessonItem.id)
+        mainScreenRoute.postValue(ScreenNames.LEARNING_MATERIAL.routeName)
     }
 }

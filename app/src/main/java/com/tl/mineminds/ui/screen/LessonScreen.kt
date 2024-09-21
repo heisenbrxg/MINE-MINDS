@@ -34,7 +34,7 @@ interface LessonScreenInteraction {
 }
 
 @Composable
-fun LessonScreen(lessonIem: List<LessonItem>, interaction: LessonScreenInteraction) {
+fun LessonScreen(lessonItems: List<LessonItem>, interaction: LessonScreenInteraction) {
     val list = listOf(
         LessonItem(1, "Addition", 1),
         LessonItem(2, "Subtraction", 1),
@@ -52,7 +52,7 @@ fun LessonScreen(lessonIem: List<LessonItem>, interaction: LessonScreenInteracti
         LazyColumn() {
             items(list.size) { index ->
                 LessonItemCard(list[index].id, list[index].lessonName, itemClicked = {
-                    interaction.onLessonSelected(list[index]) //todo replace with actual item
+                   interaction.onLessonSelected(list[index]) //todo replace with actual item
                 })
             }
         }
