@@ -52,7 +52,7 @@ fun LessonScreen(lessonIem: List<LessonItem>, interaction: LessonScreenInteracti
         LazyColumn() {
             items(list.size) { index ->
                 LessonItemCard(list[index].id, list[index].lessonName, itemClicked = {
-                   // interaction.onLessonSelected(list[index]) //todo replace with actual item
+                    interaction.onLessonSelected(list[index]) //todo replace with actual item
                 })
             }
         }
